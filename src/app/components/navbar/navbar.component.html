@@ -1,0 +1,95 @@
+<mat-toolbar class="mat-elevation-z8 flex justify-between items-center">
+
+    <!-- Search Section  -->
+    @if (!deviceS) {
+    <form class="flex items-center w-full max-w-[300px]" (submit)="onSubmit()">
+        <button mat-icon-button type="submit" class="translate-x-[42px]">
+            <mat-icon>search</mat-icon>
+        </button>
+        <input type="text" placeholder="search..." [(ngModel)]="query" name="query"
+            class="bg-transparent border rounded-full border-black dark:border-white p-[6px] w-full text-center outline-none" />
+    </form>
+    }@else {
+    <button mat-icon-button *ngIf="!showSearch" (click)="toggleShowSearch()">
+        <mat-icon>search</mat-icon>
+    </button>
+
+    <form class="flex items-center w-full" (submit)="onSubmit()" *ngIf="showSearch">
+        <button mat-icon-button type="submit" class="translate-x-[42px]">
+            <mat-icon>search</mat-icon>
+        </button>
+        <input type="text" placeholder="search..." [(ngModel)]="query" name="query"
+            class="bg-transparent border rounded-full border-black dark:border-white p-[6px] w-full text-center outline-none" />
+    </form>
+    <button mat-icon-button *ngIf="showSearch" (click)="toggleShowSearch()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    }
+
+
+
+    <!-- Title Section  -->
+    <span class=" text-blue-700 text-3xl font " *ngIf="!showSearch">
+        Cource Academy
+    </span>
+
+    <!-- Navigation Section -->
+    @if (!deviceS) {
+    <div class="flex justify-center items-center space-x-3 p-2">
+        <button mat-icon-button (click)="toggleTheme()">
+            @if(theme()==='dark') {
+            <mat-icon>light_mode</mat-icon>
+            } @else{
+            <mat-icon>dark_mode</mat-icon>
+            }
+
+        </button>
+        <p class="cursor-pointer hover:underline">Docs</p>
+        <p class="cursor-pointer hover:underline">Pricing</p>
+        <p class="cursor-pointer hover:underline">Login/signup</p>
+        <p class="cursor-pointer hover:underline">Analytics</p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbafNwVpCOrAr_0CzOHY66Ltw3CImsyAS9LQ&usqp=CAU"
+            alt="Abhisek" class="h-7 rounded-full cursor-pointer">
+    </div>
+    }@else {
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!showSearch">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="toggleTheme()">
+            @if(theme()==='dark') {
+            <mat-icon>light_mode</mat-icon>
+            } @else{
+            <mat-icon>dark_mode</mat-icon>
+            }
+            <span>
+                {{theme()==='dark'?'LIGHT':'DARK'}}
+            </span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>menu_book</mat-icon>
+            <span>Docs</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>payments</mat-icon>
+            <span>Pricing</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>trending_up</mat-icon>
+            <span>Analytics</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>login</mat-icon>
+            <span>Login/Signup</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span>Profile</span>
+        </button>
+    </mat-menu>
+    }
+
+
+
+</mat-toolbar>

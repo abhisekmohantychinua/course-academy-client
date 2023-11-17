@@ -30,7 +30,7 @@
 
 
     <!-- Title Section  -->
-    <span class=" text-blue-700 text-3xl font " *ngIf="!showSearch">
+    <span class=" text-blue-700 text-3xl font " *ngIf="!showSearch" routerLink="/">
         Cource Academy
     </span>
 
@@ -38,7 +38,7 @@
     @if (!deviceS) {
     <div class="flex justify-center items-center space-x-3 p-2">
         <button mat-icon-button (click)="toggleTheme()">
-            @if(theme()==='dark') {
+            @if(theme==='dark') {
             <mat-icon>light_mode</mat-icon>
             } @else{
             <mat-icon>dark_mode</mat-icon>
@@ -47,7 +47,7 @@
         </button>
         <p class="cursor-pointer hover:underline">Docs</p>
         <p class="cursor-pointer hover:underline">Pricing</p>
-        <p class="cursor-pointer hover:underline">Login/signup</p>
+        <p class="cursor-pointer hover:underline" routerLink="/signin">Login/signup</p>
         <p class="cursor-pointer hover:underline">Analytics</p>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbafNwVpCOrAr_0CzOHY66Ltw3CImsyAS9LQ&usqp=CAU"
             alt="Abhisek" class="h-7 rounded-full cursor-pointer">
@@ -58,13 +58,13 @@
     </button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="toggleTheme()">
-            @if(theme()==='dark') {
+            @if(theme==='dark') {
             <mat-icon>light_mode</mat-icon>
             } @else{
             <mat-icon>dark_mode</mat-icon>
             }
             <span>
-                {{theme()==='dark'?'LIGHT':'DARK'}}
+                {{theme==='dark'?'LIGHT':'DARK'}}
             </span>
         </button>
         <button mat-menu-item>
@@ -79,7 +79,7 @@
             <mat-icon>trending_up</mat-icon>
             <span>Analytics</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/signin">
             <mat-icon>login</mat-icon>
             <span>Login/Signup</span>
         </button>

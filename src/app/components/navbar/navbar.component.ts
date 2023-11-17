@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Renderer2, signal } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -19,12 +20,13 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule,
     MatMenuModule,
+    RouterLink,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
-  theme = signal<string>('light');
+  theme: string | null = '';
   query: string = '';
   deviceS: boolean = false;
   showSearch: boolean = false;
@@ -43,6 +45,7 @@ export class NavbarComponent implements OnInit {
           this.deviceS = true;
         }
       });
+    this.theme = localStorage.getItem('theme');
   }
 
   onSubmit() {
@@ -57,14 +60,14 @@ export class NavbarComponent implements OnInit {
     this.render.removeClass(this.document.body, 'dark');
     this.render.removeClass(this.document.body, 'light');
 
-    this.theme.update((t) => {
-      if (t === 'dark') {
-        this.render.addClass(this.document.body, 'light');
-        return 'light';
-      } else {
-        this.render.addClass(this.document.body, 'dark');
-        return 'dark';
-      }
-    });
+    if (this.theme === 'dark') {
+      this.render.addClass(this.document.body, 'light');
+      localStorage.setItem('theme', 'light');
+      this.theme = 'light';
+    } else {
+      this.render.addClass(this.document.body, 'dark');
+      localStorage.setItem('theme', 'dark');
+      this.theme = 'dark';
+    }
   }
 }

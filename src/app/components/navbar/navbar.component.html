@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z8 flex justify-between items-center">
+<mat-toolbar class="mat-elevation-z8 flex justify-between items-center h-[8vh]">
 
     <!-- Search Section  -->
     @if (!deviceS) {
@@ -30,8 +30,8 @@
 
 
     <!-- Title Section  -->
-    <span class=" text-blue-700 text-3xl font " *ngIf="!showSearch" routerLink="/">
-        Cource Academy
+    <span class=" text-blue-700 dark:text-blue-500 text-3xl font " *ngIf="!showSearch" routerLink="/">
+        Course Academy
     </span>
 
     <!-- Navigation Section -->
@@ -89,7 +89,4 @@
         </button>
     </mat-menu>
     }
-
-
-
 </mat-toolbar>

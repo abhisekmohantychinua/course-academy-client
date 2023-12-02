@@ -1,11 +1,15 @@
 @use "@angular/material" as mat;
 @include mat.core();
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 $my-warn: mat.define-palette(mat.$red-palette);
 
 .light {
-  $my-primary: mat.define-palette(mat.$light-blue-palette);
-  $my-accent: mat.define-palette(mat.$purple-palette);
+  $my-primary: mat.define-palette(mat.$blue-palette);
+  $my-accent: mat.define-palette(mat.$deep-purple-palette);
 
   $light-theme: mat.define-light-theme(
     (
@@ -21,8 +25,8 @@ $my-warn: mat.define-palette(mat.$red-palette);
 }
 
 .dark {
-  $my-primary: mat.define-palette(mat.$blue-palette);
-  $my-accent: mat.define-palette(mat.$deep-purple-palette);
+  $my-primary: mat.define-palette(mat.$light-blue-palette);
+  $my-accent: mat.define-palette(mat.$purple-palette);
 
   $dark-theme: mat.define-dark-theme(
     (

@@ -1,1 +1,146 @@
-<p>signup works!</p>
+<form [formGroup]="credentialGroup" (submit)="onSubmit()"
+    class="container mx-auto h-[88vh] flex justify-around items-center flex-col px-10 md:px-40 py-20">
+    <div class="mat-elevation-z8 w-full h-full  flex flex-col justify-between items-center p-5 rounded-lg">
+        <h1 class="text-3xl text-blue-500 dark:text-blue-700 my-5">Sign Up</h1>
+        @switch (stepperIndex) {
+        @case (0) {
+        <div class="w-full md:w-4/5 space-y-2">
+            <label for="type" class="text-lg font-medium">Select type</label>
+            <select id="type" formControlName="type"
+                class="bg-gray-100 border text-sm rounded-lg outline-none focus:outline-none  focus:ring-blue-700 focus:border-blue-700 block w-full p-2.5 my-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected disabled>Choose a Type</option>
+                <option ngValue="TEACHER">Teacher</option>
+                <option ngValue="STUDENT">Student</option>
+                <option ngValue="BOTH">Both</option>
+            </select>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('type')?.invalid && (credentialGroup.get('type')?.touched||credentialGroup.get('type')?.dirty)">
+                Please select a type.</p>
+        </div>
+        }
+        @case (1) {
+        <div class="w-4/5 space-y-2">
+            <!-- Name Field  -->
+            <label for="name" class="text-lg font-medium">Your Name</label>
+            <input type="text" name="name" id="name" placeholder="Ex. John Desuza" formControlName="name"
+                class="bg-transparent w-full p-2 border text-sm rounded-lg outline-none focus:outline-none border-gray-500">
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('name')?.invalid && (credentialGroup.get('name')?.touched||credentialGroup.get('name')?.dirty)">
+                Please enter your name.</p>
+        </div>
+        }
+        @case (2) {
+        <div class="w-4/5 space-y-2">
+            <!-- Email Field  -->
+            <label for="email" class="text-lg font-medium">Your Email</label>
+            <input type="email" name="email" id="email" placeholder="Ex. example@email.com" formControlName="email"
+                class="bg-transparent w-full p-2 border text-sm rounded-lg outline-none focus:outline-none border-gray-500">
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('email')?.hasError('required') && (credentialGroup.get('email')?.touched||credentialGroup.get('email')?.dirty)">
+                Please enter an email.</p>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('email')?.hasError('email') && (credentialGroup.get('email')?.touched||credentialGroup.get('email')?.dirty)">
+                Please enter an valid email.</p>
+        </div>
+        }
+        @case (3) {
+        <div class="w-4/5 space-y-2">
+            <!-- Phone Field  -->
+            <label for="phone" class="text-lg font-medium">Your Phone</label>
+            <input type="tel" name="phone" id="phone" formControlName="phone" placeholder="Ex. 123456789"
+                class="bg-transparent w-full p-2 border text-sm rounded-lg outline-none focus:outline-none border-gray-500">
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('phone')?.hasError('required') && (credentialGroup.get('phone')?.touched||credentialGroup.get('phone')?.dirty)">
+                Please enter your phone number.</p>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('phone')?.hasError('minlength') && (credentialGroup.get('phone')?.touched||credentialGroup.get('phone')?.dirty)">
+                Phone numbers length must be 10 digit.</p>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('phone')?.hasError('pattern') && (credentialGroup.get('phone')?.touched||credentialGroup.get('phone')?.dirty)">
+                Please provide and valid phone number.</p>
+        </div>
+        }
+        @case (4) {
+        <div class="w-4/5 space-y-2">
+            <!-- About Field  -->
+            <label for="phone" class="text-lg font-medium">Your About</label>
+            <textarea name="phone" id="phone" formControlName="about" placeholder="Ex. I am a quick learner."
+                class="bg-transparent w-full p-2 border text-sm rounded-lg outline-none focus:outline-none border-gray-500"></textarea>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('about')?.hasError('required') && (credentialGroup.get('about')?.touched||credentialGroup.get('about')?.dirty)">
+                The about field is required.</p>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('about')?.hasError('minlength') && (credentialGroup.get('about')?.touched||credentialGroup.get('about')?.dirty)">
+                The about must contain atleast 255 characters.</p>
+        </div>
+        }
+        @case (5) {
+        <div class="w-4/5 space-y-2">
+            <!-- Password Field  -->
+            <label for="password" class="text-lg font-medium">Password</label>
+            <input type="text" name="password" id="password" formControlName="password" placeholder="Ex. password"
+                class="bg-transparent w-full p-2 border text-sm rounded-lg outline-none focus:outline-none border-gray-500">
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('password')?.hasError('required') && (credentialGroup.get('password')?.touched||credentialGroup.get('password')?.dirty)">
+                This field is required.</p>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('password')?.hasError('minlength') && (credentialGroup.get('password')?.touched||credentialGroup.get('password')?.dirty)">
+                The password must be 8 in length.</p>
+
+            <!-- Confirm Password Field  -->
+            <label for="confirmPassword" class="text-lg font-medium">Confirm Password</label>
+            <input type="text" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword"
+                placeholder="Ex. password"
+                class="bg-transparent w-full p-2 border text-sm rounded-lg outline-none focus:outline-none border-gray-500">
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.get('confirmPassword')?.hasError('required') && (credentialGroup.get('confirmPassword')?.touched||credentialGroup.get('confirmPassword')?.dirty)">
+                This field is required.</p>
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="credentialGroup.errors?.['matcherror'] && (credentialGroup.get('confirmPassword')?.touched||credentialGroup.get('confirmPassword')?.dirty)">
+                Password must match each other.</p>
+        </div>
+        }
+        @case (6) {
+        <div class="w-4/5 space-y-2 text-center">
+            <label class="text-lg font-medium">Profile Picture</label>
+            <img [src]="profileUrl" alt="" (click)="profile.click()"
+                class="object-center overflow-hidden rounded-full w-[200px] h-[200px]  mx-auto">
+            <p class="text-xs text-red-700 dark:text-red-500 mx-auto" *ngIf="profileError!==''">
+                {{profileError}}
+            </p>
+        </div>
+        <input class="hidden" type="file" accept="image/*" name="profile" id="profile"
+            (change)="onProfileChange($event)" #profile>
+        }
+        @case (7) {
+        <div class="w-4/5 space-y-2 text-center">
+            <label class="text-lg font-medium">Cover Picture</label>
+            <img [src]="coverUrl" alt="" (click)="cover.click()"
+                class="object-center border overflow-hidden w-[400px] h-[225px] mx-auto">
+            <p class="text-xs text-red-700 dark:text-red-500 mx-auto" *ngIf="coverError!==''">
+                {{coverError}}
+            </p>
+        </div>
+        <input class="hidden" type="file" accept="image/*" name="cover" id="cover" (change)="onCoverchange($event)"
+            #cover>
+        }
+        }
+        <div class="w-full px-4 flex justify-between items-center">
+
+            @if (stepperIndex===0) {
+            <button type="button" routerLink="/signin" mat-flat-button color="accent">Signin</button>
+            }@else {
+            <button type="button" mat-button color="primary" (click)="previous()">Back</button>
+            }
+            <p class="text-xs text-red-700 dark:text-red-500"
+                *ngIf="(!profileImage || !coverImage || credentialGroup.invalid) && stepperIndex===7">Complete all the
+                fields to submit.</p>
+            @if(stepperIndex!==7){
+            <button type="button" mat-button color="primary" (click)="next()">Next</button>
+            }@else{
+            <button type="submit" mat-raised-button color="primary"
+                [disabled]="!profileImage || !coverImage || credentialGroup.invalid">Submit</button>
+            }
+        </div>
+    </div>
+</form>

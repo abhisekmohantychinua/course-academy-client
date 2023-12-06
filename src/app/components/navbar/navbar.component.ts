@@ -8,8 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UtilityService } from '../../services/utility.service';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/entity/user';
 
 @Component({
   selector: 'app-navbar',
@@ -31,10 +33,14 @@ export class NavbarComponent implements OnInit {
   query: string = '';
   deviceS: boolean = false;
   showSearch: boolean = false;
+  isLoggesIn: boolean = false;
+  user?: User | null;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private render: Renderer2,
     private breakPointService: BreakpointObserver,
+    private router: Router,
+    private authService: AuthService,
     private util: UtilityService
   ) {}
 
@@ -47,13 +53,15 @@ export class NavbarComponent implements OnInit {
           this.deviceS = true;
         }
       });
+    this.isLoggesIn = this.authService.isLoggedIn();
+    this.user = this.authService.getAuthUser();
     this.theme = this.util.storageGet('theme');
   }
 
   onSubmit() {
     console.log(this.query);
+    this.router.navigate(['search'], { queryParams: { query: this.query } });
     this.query = '';
-    this.showSearch = false;
   }
   toggleShowSearch() {
     this.showSearch = !this.showSearch;

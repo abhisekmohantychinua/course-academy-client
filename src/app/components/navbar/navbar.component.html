@@ -47,10 +47,13 @@
         </button>
         <p class="cursor-pointer hover:underline">Docs</p>
         <p class="cursor-pointer hover:underline">Pricing</p>
-        <p class="cursor-pointer hover:underline" routerLink="/signin">Login/signup</p>
-        <p class="cursor-pointer hover:underline">Analytics</p>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbafNwVpCOrAr_0CzOHY66Ltw3CImsyAS9LQ&usqp=CAU"
-            alt="Abhisek" class="h-7 rounded-full cursor-pointer">
+        <p class="cursor-pointer hover:underline" routerLink="/dashboard" *ngIf="isLoggesIn">Dashboard</p>
+        <p class="cursor-pointer hover:underline" routerLink="/signin" *ngIf="!isLoggesIn">Login/signup</p>
+        <p class="cursor-pointer hover:underline" *ngIf="isLoggesIn && user?.role==='TEACHER' || user?.role==='BOTH'"
+            routerLink="/analytics">
+            Analytics</p>
+        <img [src]="user?.profileUrl" [routerLink]="'/profile/'+user?.id" [alt]="user?.name"
+            class="h-7 rounded-full cursor-pointer">
     </div>
     }@else {
     <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!showSearch">
@@ -75,15 +78,21 @@
             <mat-icon>payments</mat-icon>
             <span>Pricing</span>
         </button>
-        <button mat-menu-item>
-            <mat-icon>trending_up</mat-icon>
-            <span>Analytics</span>
+        <button mat-menu-item routerLink="/dashboard" *ngIf="isLoggesIn">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
         </button>
-        <button mat-menu-item routerLink="/signin">
+
+        <button mat-menu-item routerLink="/signin" *ngIf="!isLoggesIn">
             <mat-icon>login</mat-icon>
             <span>Login/Signup</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="isLoggesIn && user?.role==='TEACHER' || user?.role==='BOTH'"
+            routerLink="/analytics">
+            <mat-icon>trending_up</mat-icon>
+            <span>Analytics</span>
+        </button>
+        <button mat-menu-item [routerLink]="'/profile/'+user?.id">
             <mat-icon>account_circle</mat-icon>
             <span>Profile</span>
         </button>

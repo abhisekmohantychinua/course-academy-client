@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +34,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private render: Renderer2,
-    private breakPointService: BreakpointObserver
+    private breakPointService: BreakpointObserver,
+    private util: UtilityService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class NavbarComponent implements OnInit {
           this.deviceS = true;
         }
       });
-    this.theme = localStorage.getItem('theme');
+    this.theme = this.util.storageGet('theme');
   }
 
   onSubmit() {
@@ -62,11 +64,11 @@ export class NavbarComponent implements OnInit {
 
     if (this.theme === 'dark') {
       this.render.addClass(this.document.body, 'light');
-      localStorage.setItem('theme', 'light');
+      this.util.storageSet('theme', 'light');
       this.theme = 'light';
     } else {
       this.render.addClass(this.document.body, 'dark');
-      localStorage.setItem('theme', 'dark');
+      this.util.storageSet('theme', 'dark');
       this.theme = 'dark';
     }
   }

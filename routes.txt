@@ -1,0 +1,17 @@
+		Routes			|			Description			|		Roles			|		Permissions		|
+_________________________________________________________________________________________________________
+/signin 				-> Login								All						All
+/signup 				-> Register								All						All
+/ 						-> Dashboard						Student/Teacher				All
+/admin					-> Admin Panel						Admin						All
+/pricing				-> Pricing							Student						View
+/profile/<id>			-> User profile						All							View				
+/profile/<id>/my_cource	-> My Courses						Teacher						View/Edit/Delete
+/profile/<id>/my_cource	-> Upload Courses					Teacher					Create/View/Edit/Delete
+/profile/<id>/courses 	-> Purchased Course					Student						View
+/search/id=?			-> Searching Query						All						View
+/course/<id>			-> Course Display Description		Student						View/Purchased
+/course/<id>/purchase	-> purchase							Student						Purchase
+/course/<id>/<field>	-> Reading and Studying				Student						View
+/analytics				-> Analytics						Teacher						View
+/docs/<id> or <field>	-> Documentation						All						View

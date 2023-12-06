@@ -1,0 +1,50 @@
+<div class="w-full min-h-[88vh] ">
+    <!-- Cover Image  -->
+    <div class="relative w-full pb-[25%] ">
+        <img [src]="user?.coverUrl" alt="" class="absolute top-0 left-0 w-full h-full object-cover object-center">
+    </div>
+    <div class="container mx-auto  flex flex-col md:flex-row justify-start items-start gap-4">
+        <div class="w-full md:w-2/5 h-20 md:h-32 flex justify-center md:justify-end items-center px-4">
+            <img [src]="user?.profileUrl" alt=""
+                class="w-40 md:w-60 h-40 md:h-60 rounded-full object-cover object-center border-4 border-white dark:border-gray-700 -translate-y-6 md:-translate-y-12">
+        </div>
+        <div class="w-full md:w-3/5 my-2 flex flex-col justify-start items-center md:items-start">
+            <p class="text-3xl font-medium">
+                {{user?.name}}
+            </p>
+            <p class="text-sm mx-2 font-normal">
+                {{user?.teacherProfile?.contactEmail}}
+            </p>
+            <p class="text-sm mx-2 font-normal">
+                {{user?.studentProfile?.contactEmail}}
+            </p>
+            <p class="text-base flex gap-2 items-center font-semibold underline cursor-pointer">
+                WEBSITE
+                <mat-icon>link</mat-icon>
+            </p>
+            <p class="text-base font-normal" *ngIf="user?.teacherProfile?.talksAbout">
+                Talks About-
+                @for (item of user?.teacherProfile?.talksAbout; track $index) {
+                {{item+', '}}
+                }
+            </p>
+            <p class="text-base font-normal" *ngIf="user?.studentProfile?.findsAbout">
+                Finds About-
+                @for (item of user?.studentProfile?.findsAbout; track $index) {
+                {{item+', '}}
+                }
+            </p>
+
+        </div>
+    </div>
+    <p class="container mx-auto text-base font-normal px-4 my-5 text-center">
+        {{user?.about}}
+    </p>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Education" *ngIf="user?.teacherProfile?.educations">Content 1</mat-tab>
+        <mat-tab label="Experiance" *ngIf="user?.teacherProfile?.experiancess">Content 2</mat-tab>
+        <mat-tab label="Courses" *ngIf="user?.teacherProfile?.courses">Content 3</mat-tab>
+        <mat-tab label="My Courses" *ngIf="user?.studentProfile?.purchases && isMyProfile">Content 3</mat-tab>
+        <mat-tab label="Settings" *ngIf="isMyProfile">Content 3</mat-tab>
+    </mat-tab-group>
+</div>

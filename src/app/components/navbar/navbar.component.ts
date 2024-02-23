@@ -59,7 +59,6 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.query);
     this.router.navigate(['search'], { queryParams: { query: this.query } });
     this.query = '';
   }

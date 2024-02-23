@@ -1,0 +1,21 @@
+<div class="max-h-[400px] max-w-[300px]">
+    <img [src]="teacher.userProfile?.profileUrl" alt=""
+        class="max-h-[250px] max-w-[250px] mx-auto rounded-full object-cover object-center">
+    <div class="w-full p-2 flex flex-col text-center">
+        <h1 class="text-2xl font-medium">
+            {{teacher.userProfile?.name}}
+        </h1>
+        <h2 class="text-base font-light">
+            @for (item of teacher.talksAbout; track $index) {
+            {{item+" "}}
+            }
+        </h2>
+        <p class="text-xs text-center mt-2">
+            {{
+            teacher.userProfile?.about
+            }}
+
+        </p>
+    </div>
+
+</div>

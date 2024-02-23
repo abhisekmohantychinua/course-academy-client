@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/entity/user';
+import { Teacher } from '../models/entity/teacher';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,17 @@ export class UserService {
         findsAbout: ['Economics', 'Politics', 'Lorem', 'Ipsum'],
       },
     };
+  }
+  searchTeacherByQuery(query: string): Teacher[] {
+    return [
+      {
+        id: 'teacher',
+        userProfile: {
+          name: 'Teacher Mohanty',
+          profileUrl:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbafNwVpCOrAr_0CzOHY66Ltw3CImsyAS9LQ&usqp=CAU',
+        },
+      },
+    ];
   }
 }
